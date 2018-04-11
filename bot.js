@@ -16,7 +16,7 @@ var opts;
 var text_message;
 console.log('Bot server started in the ' + process.env.NODE_ENV + ' mode');
 var GameWL = ["Halcyondays", "stereodamage"];
-var StickerWL = [ "Halcyondays","rocophena", "sadsama", "vzzzjem", "stereodamage"];
+var StickerWL = ["Halcyondays", "rocophena", "sadsama", "vzzzjem", "stereodamage"];
 bot.on('message', (msg) => {
   var data = msg;
   var message = data.text;
@@ -27,12 +27,12 @@ bot.on('message', (msg) => {
     if (message.indexOf('/faq') != -1) {
       if (data.hasOwnProperty("reply_to_message")) {
         opts = {
-            reply_to_message_id: data.reply_to_message.message_id,
-            parse_mode: 'Markdown'
+          reply_to_message_id: data.reply_to_message.message_id,
+          parse_mode: 'Markdown'
         };
       } else {
         opts = {
-            parse_mode: 'Markdown'
+          parse_mode: 'Markdown'
         };
       }
       text_message = '[FAQ](http://telegra.ph/Dealchat-FAQ-03-11)';
@@ -42,10 +42,10 @@ bot.on('message', (msg) => {
       return 1;
     }
   }
-  if (StickerWL.indexOf(data.from.username) == -1 && data.hasOwnProperty("sticker")){
+  if (StickerWL.indexOf(data.from.username) == -1 && data.hasOwnProperty("sticker")) {
     console.log(data.sticker);
     opts = {
-        parse_mode: 'Markdown'
+      parse_mode: 'Markdown'
     };
     if (data.sticker.set_name.indexOf('katyaserebro') != -1 ||
       data.sticker.set_name.indexOf('katya_kishuk') != -1 ||
@@ -76,17 +76,12 @@ bot.on('message', (msg) => {
   //Check if message contains Game attribute
   if (data.hasOwnProperty("game") &&
     GameWL.indexOf(data.from.username) == -1) {
-    console.log(GameWL.indexOf(data.from.username));
-    request.post('https://api.telegram.org/bot' + token + '/deletemessage')
-      .form({
-        'chat_id': chat_id,
-        'message_id': message_id
-      });
-    request.post('https://api.telegram.org/bot' + token + '/sendMessage')
-      .form({
-        'chat_id': chat_id,
-        'text': '[' + user.first_name + '](tg://user?id=' + user.id + ') твоя игра унитожена. 🔪🇺🇬🤷🏿‍♂️ Беги, ниггер.'
-      });
+    opts = {
+      parse_mode: 'Markdown'
+    };
+    text_message = '[' + user.first_name + '](tg://user?id=' + user.id + ') твоя игра унитожена. 🔪🇺🇬🤷🏿‍♂️ Беги, ниггер.';
+    bot.deleteMessage(chat_id, message_id);
+    bot.sendMessage(chat_id, text_message, opts);
 
     //console.log("Game from @" + username + " deleted");
     return 1;
