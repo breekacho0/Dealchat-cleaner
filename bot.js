@@ -16,7 +16,7 @@ var opts;
 var text_message;
 console.log('Bot server started in the ' + process.env.NODE_ENV + ' mode');
 var GameWL = ["Halcyondays", "stereodamage"];
-var StickerWL = ["Halcyondays", "rocophena", "sadsama", "vzzzjem", "stereodamage"];
+var StickerWL = process.env.STICKERWL.split(' ');
 bot.on('message', (msg) => {
   var data = msg;
   var message = data.text;
