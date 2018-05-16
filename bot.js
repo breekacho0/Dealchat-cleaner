@@ -66,7 +66,7 @@ bot.on('message', (msg) => {
           console.log("Sticker from " + user.id + " deleted");
           return 1;
         }
-        if (StickerBL.indexOf(data.sticker.set_name) == -1){
+        if (StickerBL.indexOf(data.sticker.set_name) != -1){
           text_message = '[' + user.first_name + '](tg://user?id=' + user.id + ') пошел ты, кожаный ублюдок.';
           bot.deleteMessage(chat_id, message_id);
           bot.sendMessage(chat_id, text_message, opts);
