@@ -1,7 +1,8 @@
+'use strict';
 const token = process.env.TOKEN;
 
 const Bot = require('node-telegram-bot-api');
-let request = require("request");
+let request = require('request');
 let bot;
 
 if (process.env.NODE_ENV === 'production') {
@@ -15,7 +16,7 @@ if (process.env.NODE_ENV === 'production') {
 let opts;
 let text_message;
 console.log('Bot server started in the ${process.env.NODE_ENV} mode');
-let GameWL = ["Halcyondays", "stereodamage"];
+let GameWL = ['Halcyondays', 'stereodamage'];
 let StickerBL = process.env.STICKERBL.split(' ');
 let StickerWL = process.env.STICKERWL.split(' ');
 bot.on('message', (msg) => {
@@ -24,9 +25,9 @@ bot.on('message', (msg) => {
   let user = data.from;
   let chat_id = data.chat.id;
   let message_id = data.message_id;
-  if (data.hasOwnProperty("text")) {
+  if (data.hasOwnProperty('text')) {
     if (message.indexOf('/faq') != -1) {
-      if (data.hasOwnProperty("reply_to_message")) {
+      if (data.hasOwnProperty('reply_to_message')) {
         opts = {
           reply_to_message_id: data.reply_to_message.message_id,
           parse_mode: 'Markdown'
@@ -38,46 +39,46 @@ bot.on('message', (msg) => {
       }
       text_message = '[FAQ](http://telegra.ph/Dealchat-FAQ-03-11)';
       bot.sendMessage(chat_id, text_message, opts);
-      console.log("FAQ deleted from ${ user.first_name } ${ user.id }");
+      console.log('FAQ deleted from ${ user.first_name } ${ user.id }');
       bot.deleteMessage(chat_id, message_id);
       return 1;
     }
   }
-  if (data.hasOwnProperty("sticker")) {
+  if (data.hasOwnProperty('sticker')) {
     console.log(data.sticker);
     if (StickerWL.indexOf(data.from.username) == -1) {
       opts = {
         parse_mode: 'Markdown'
       };
-      if (data.sticker.hasOwnProperty("set_name")) {
+      if (data.sticker.hasOwnProperty('set_name')) {
         if (data.sticker.set_name.indexOf('katyaserebro') != -1 ||
           data.sticker.set_name.indexOf('katya_kishuk') != -1 ||
           data.sticker.set_name.indexOf('KatyaKishchuk') != -1) {
           text_message = '[ ${user.first_name}](tg://user?id= {$user.id}) твой стикер удален. Кищук вип.';
           bot.deleteMessage(chat_id, message_id);
           bot.sendMessage(chat_id, text_message, opts);
-          console.log("Sticker from ${user.id} deleted");
+          console.log('Sticker from ${user.id} deleted');
           return 1;
         }
         if (data.sticker.set_name.indexOf('SpurdoFaces') != -1) {
           text_message = '[ ${user.first_name}](tg://user?id= {$user.id}) твой стикер удален. Вип стикер.';
           bot.deleteMessage(chat_id, message_id);
           bot.sendMessage(chat_id, text_message, opts);
-          console.log("Sticker from ${user.id} deleted");
+          console.log('Sticker from ${user.id} deleted');
           return 1;
         }
         if (StickerBL.indexOf(data.sticker.set_name) != -1){
           text_message = '[ ${user.first_name}](tg://user?id= {$user.id}) пошел ты, кожаный ублюдок.';
           bot.deleteMessage(chat_id, message_id);
           bot.sendMessage(chat_id, text_message, opts);
-          console.log("Sticker from ${user.id} deleted");
+          console.log('Sticker from ${user.id} deleted');
           return 1;
         }
       }
     }
   }
   //Check if message contains Game attribute
-  if (data.hasOwnProperty("game") &&
+  if (data.hasOwnProperty('game') &&
     GameWL.indexOf(data.from.username) == -1) {
     opts = {
       parse_mode: 'Markdown'
@@ -86,7 +87,7 @@ bot.on('message', (msg) => {
     bot.deleteMessage(chat_id, message_id);
     bot.sendMessage(chat_id, text_message, opts);
 
-    //console.log("Game from @" + username + " deleted");
+    //console.log('Game from @' + username + ' deleted');
     return 1;
   }
 });
