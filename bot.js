@@ -1,7 +1,7 @@
 const token = process.env.TOKEN;
 
 const Bot = require('node-telegram-bot-api');
-var request = require("request");
+let request = require("request");
 let bot;
 
 if (process.env.NODE_ENV === 'production') {
@@ -12,18 +12,18 @@ if (process.env.NODE_ENV === 'production') {
     polling: true
   });
 }
-var opts;
-var text_message;
-console.log('Bot server started in the ' + process.env.NODE_ENV + ' mode');
-var GameWL = ["Halcyondays", "stereodamage"];
-var StickerBL = process.env.STICKERBL.split(' ');
-var StickerWL = process.env.STICKERWL.split(' ');
+let opts;
+let text_message;
+console.log('Bot server started in the ${process.env.NODE_ENV} mode');
+let GameWL = ["Halcyondays", "stereodamage"];
+let StickerBL = process.env.STICKERBL.split(' ');
+let StickerWL = process.env.STICKERWL.split(' ');
 bot.on('message', (msg) => {
-  var data = msg;
-  var message = data.text;
-  var user = data.from;
-  var chat_id = data.chat.id;
-  var message_id = data.message_id;
+  let data = msg;
+  let message = data.text;
+  let user = data.from;
+  let chat_id = data.chat.id;
+  let message_id = data.message_id;
   if (data.hasOwnProperty("text")) {
     if (message.indexOf('/faq') != -1) {
       if (data.hasOwnProperty("reply_to_message")) {
@@ -38,7 +38,7 @@ bot.on('message', (msg) => {
       }
       text_message = '[FAQ](http://telegra.ph/Dealchat-FAQ-03-11)';
       bot.sendMessage(chat_id, text_message, opts);
-      console.log("FAQ deleted from " + user.first_name + "|" + user.id);
+      console.log("FAQ deleted from ${ user.first_name } ${ user.id }");
       bot.deleteMessage(chat_id, message_id);
       return 1;
     }
@@ -53,24 +53,24 @@ bot.on('message', (msg) => {
         if (data.sticker.set_name.indexOf('katyaserebro') != -1 ||
           data.sticker.set_name.indexOf('katya_kishuk') != -1 ||
           data.sticker.set_name.indexOf('KatyaKishchuk') != -1) {
-          text_message = '[' + user.first_name + '](tg://user?id=' + user.id + ') твой стикер удален. Кищук вип.';
+          text_message = '[ ${user.first_name}](tg://user?id= {$user.id}) твой стикер удален. Кищук вип.';
           bot.deleteMessage(chat_id, message_id);
           bot.sendMessage(chat_id, text_message, opts);
-          console.log("Sticker from " + user.id + " deleted");
+          console.log("Sticker from ${user.id} deleted");
           return 1;
         }
         if (data.sticker.set_name.indexOf('SpurdoFaces') != -1) {
-          text_message = '[' + user.first_name + '](tg://user?id=' + user.id + ') твой стикер удален. Вип стикер.';
+          text_message = '[ ${user.first_name}](tg://user?id= {$user.id}) твой стикер удален. Вип стикер.';
           bot.deleteMessage(chat_id, message_id);
           bot.sendMessage(chat_id, text_message, opts);
-          console.log("Sticker from " + user.id + " deleted");
+          console.log("Sticker from ${user.id} deleted");
           return 1;
         }
         if (StickerBL.indexOf(data.sticker.set_name) != -1){
-          text_message = '[' + user.first_name + '](tg://user?id=' + user.id + ') пошел ты, кожаный ублюдок.';
+          text_message = '[ ${user.first_name}](tg://user?id= {$user.id}) пошел ты, кожаный ублюдок.';
           bot.deleteMessage(chat_id, message_id);
           bot.sendMessage(chat_id, text_message, opts);
-          console.log("Sticker from " + user.id + " deleted");
+          console.log("Sticker from ${user.id} deleted");
           return 1;
         }
       }
@@ -82,7 +82,7 @@ bot.on('message', (msg) => {
     opts = {
       parse_mode: 'Markdown'
     };
-    text_message = '[' + user.first_name + '](tg://user?id=' + user.id + ') твоя игра унитожена. 🔪🇺🇬🤷🏿‍♂️ Беги, ниггер.';
+    text_message = '[ ${user.first_name}](tg://user?id= {$user.id}) твоя игра унитожена. 🔪🇺🇬🤷🏿‍♂️ Беги, ниггер.';
     bot.deleteMessage(chat_id, message_id);
     bot.sendMessage(chat_id, text_message, opts);
 
