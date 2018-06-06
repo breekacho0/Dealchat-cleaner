@@ -7,6 +7,7 @@ let bot;
 if (process.env.NODE_ENV === 'production') {
   bot = new Bot(token);
   bot.setWebHook(process.env.URL + bot.token);
+
 } else {
   bot = new Bot(token, {
     polling: true
@@ -15,9 +16,15 @@ if (process.env.NODE_ENV === 'production') {
 var opts;
 var text_message;
 console.log('Bot server started in the ' + process.env.NODE_ENV + ' mode');
+bot.sendMessage(-1001320202440, 'Here comes the GACHI day. Enjoy the lash of the spanking.');
 var GameWL = ["Halcyondays", "stereodamage"];
+const gachiSP = [ "admiralbulldog", "gachisticker","Gatimuti", "GachiWorld" ];
 var StickerBL = process.env.STICKERBL.split(' ');
 var StickerWL = process.env.STICKERWL.split(' ');
+var spEvent = process.env.EVENT;
+if (spEvent=='gachi'){
+  bot.sendMessage(-1001320202440, 'Here comes the GACHI day. Enjoy the lash of the spanking.');
+}
 bot.on('message', (msg) => {
   var data = msg;
   var message = data.text;
@@ -49,29 +56,40 @@ bot.on('message', (msg) => {
       opts = {
         parse_mode: 'Markdown'
       };
+
       if (data.sticker.hasOwnProperty("set_name")) {
-        if (data.sticker.set_name.indexOf('katyaserebro') != -1 ||
-          data.sticker.set_name.indexOf('katya_kishuk') != -1 ||
-          data.sticker.set_name.indexOf('KatyaKishchuk') != -1) {
-          text_message = '[' + user.first_name + '](tg://user?id=' + user.id + ') твой стикер удален. Кищук вип.';
-          bot.deleteMessage(chat_id, message_id);
-          bot.sendMessage(chat_id, text_message, opts);
-          console.log("Sticker from " + user.id + " deleted");
-          return 1;
-        }
-        if (data.sticker.set_name.indexOf('SpurdoFaces') != -1) {
-          text_message = '[' + user.first_name + '](tg://user?id=' + user.id + ') твой стикер удален. Вип стикер.';
-          bot.deleteMessage(chat_id, message_id);
-          bot.sendMessage(chat_id, text_message, opts);
-          console.log("Sticker from " + user.id + " deleted");
-          return 1;
-        }
-        if (StickerBL.indexOf(data.sticker.set_name) != -1){
-          text_message = '[' + user.first_name + '](tg://user?id=' + user.id + ') пошел ты, кожаный ублюдок.';
-          bot.deleteMessage(chat_id, message_id);
-          bot.sendMessage(chat_id, text_message, opts);
-          console.log("Sticker from " + user.id + " deleted");
-          return 1;
+        if (spEvent == 'gachi') {
+          if (gachiSP.indexOf(data.sticker.set_name) == -1) {
+            text_message = '[' + user.first_name + '](tg://user?id=' + user.id + ') fuck you, leathermen.';
+            bot.deleteMessage(chat_id, message_id);
+            bot.sendMessage(chat_id, text_message, opts);
+            console.log("Sticker from " + user.id + " deleted");
+            return 1;
+          }
+        } else {
+          if (data.sticker.set_name.indexOf('katyaserebro') != -1 ||
+              data.sticker.set_name.indexOf('katya_kishuk') != -1 ||
+              data.sticker.set_name.indexOf('KatyaKishchuk') != -1) {
+            text_message = '[' + user.first_name + '](tg://user?id=' + user.id + ') твой стикер удален. Кищук вип.';
+            bot.deleteMessage(chat_id, message_id);
+            bot.sendMessage(chat_id, text_message, opts);
+            console.log("Sticker from " + user.id + " deleted");
+            return 1;
+          }
+          if (data.sticker.set_name.indexOf('SpurdoFaces') != -1) {
+            text_message = '[' + user.first_name + '](tg://user?id=' + user.id + ') твой стикер удален. Вип стикер.';
+            bot.deleteMessage(chat_id, message_id);
+            bot.sendMessage(chat_id, text_message, opts);
+            console.log("Sticker from " + user.id + " deleted");
+            return 1;
+          }
+          if (StickerBL.indexOf(data.sticker.set_name) != -1) {
+            text_message = '[' + user.first_name + '](tg://user?id=' + user.id + ') пошел ты, кожаный ублюдок.';
+            bot.deleteMessage(chat_id, message_id);
+            bot.sendMessage(chat_id, text_message, opts);
+            console.log("Sticker from " + user.id + " deleted");
+            return 1;
+          }
         }
       }
     }
