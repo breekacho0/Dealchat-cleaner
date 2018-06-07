@@ -22,7 +22,7 @@ const gachiSP = [ "admiralbulldog", "gachisticker","Gatimuti", "GachiWorld" ];
 var StickerBL = process.env.STICKERBL.split(' ');
 var StickerWL = process.env.STICKERWL.split(' ');
 var spEvent = process.env.EVENT;
-if (spEvent=='gachi'){
+if (spEvent.indexOf('gachi')!=-1){
   bot.sendMessage(-1001320202440, 'Here comes the GACHI day. Enjoy the lash of the spanking.');
 }
 bot.on('message', (msg) => {
