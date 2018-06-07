@@ -16,7 +16,6 @@ if (process.env.NODE_ENV === 'production') {
 var opts;
 var text_message;
 console.log('Bot server started in the ' + process.env.NODE_ENV + ' mode');
-bot.sendMessage(-1001320202440, 'Here comes the GACHI day. Enjoy the lash of the spanking.');
 var GameWL = ["Halcyondays", "stereodamage"];
 const gachiSP = [ "admiralbulldog", "gachisticker","Gatimuti", "GachiWorld" ];
 var StickerBL = process.env.STICKERBL.split(' ');
