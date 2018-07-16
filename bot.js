@@ -21,6 +21,7 @@ const gachiSP = [ "admiralbulldog", "gachisticker","Gatimuti", "GachiWorld" ];
 var StickerBL = process.env.STICKERBL.split(' ');
 var StickerWL = process.env.STICKERWL.split(' ');
 var spEvent = process.env.EVENT;
+var FAQ = process.env.FAQ;
 if (spEvent.indexOf('gachi')!=-1){
   bot.sendMessage(-1001320202440, 'Here comes the GACHI day. Enjoy the lash of the spanking.');
 }
@@ -42,7 +43,7 @@ bot.on('message', (msg) => {
           parse_mode: 'Markdown'
         };
       }
-      text_message = '[FAQ](http://telegra.ph/Dealchat-FAQ-03-11)';
+      text_message = '[FAQ]('+FAQ+')';
       bot.sendMessage(chat_id, text_message, opts);
       console.log("FAQ deleted from " + user.first_name + "|" + user.id);
       bot.deleteMessage(chat_id, message_id);
