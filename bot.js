@@ -19,7 +19,6 @@ console.log('Bot server started in the ' + process.env.NODE_ENV + ' mode');
 var GameWL = ["Halcyondays", "stereodamage"];
 const gachiSP = ["admiralbulldog", "gachisticker", "Gatimuti", "GachiWorld"];
 var StickerBL = process.env.STICKERBL.split(' ');
-
 var spEvent = process.env.EVENT;
 var FAQ = process.env.FAQ;
 if (spEvent.indexOf('gachi') != -1) {
@@ -66,7 +65,6 @@ bot.on('message', (msg) => {
             }
           }
         }
-
       }
     }
   });
@@ -81,15 +79,6 @@ bot.on('message', (msg) => {
       console.log("FAQ deleted from " + user.first_name + "|" + user.id);
       bot.deleteMessage(chat_id, message_id);
       return 1;
-    }
-  }
-  if (data.hasOwnProperty("sticker")) {
-    console.log(data.sticker);
-    if (StickerWL.indexOf(data.from.username) == -1) {
-
-
-
-
     }
   }
   //Check if message contains Game attribute
