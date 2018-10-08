@@ -19,7 +19,7 @@ console.log('Bot server started in the ' + process.env.NODE_ENV + ' mode');
 var GameWL = ["Halcyondays", "stereodamage"];
 const gachiSP = [ "admiralbulldog", "gachisticker","Gatimuti", "GachiWorld" ];
 var StickerBL = process.env.STICKERBL.split(' ');
-var StickerWL = process.env.STICKERWL.split(' ');
+var StickerWL = bot.getChatAdministrators(-1001320202440);
 var spEvent = process.env.EVENT;
 var FAQ = process.env.FAQ;
 if (spEvent.indexOf('gachi')!=-1){
