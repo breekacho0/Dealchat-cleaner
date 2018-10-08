@@ -36,7 +36,7 @@ bot.on('message', (msg) => {
   if (data.hasOwnProperty("sticker")) {
     bot.getChatMember(chat_id, user.id).then(chatMember => {
       console.log(data.sticker);
-      if (chatMember.status.indexOf('administrator') != -1 || chatMember.status.indexOf('creator')!=-1) {
+      if (chatMember.status.indexOf('administrator') == -1 || chatMember.status.indexOf('creator') == -1) {
         if (data.sticker.hasOwnProperty("set_name")) {
           if (spEvent == 'gachi') {
             if (gachiSP.indexOf(data.sticker.set_name) == -1) {
